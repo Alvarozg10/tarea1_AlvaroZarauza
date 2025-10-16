@@ -20,7 +20,7 @@ public class App {
             System.out.println("\nMenú principal:");
             System.out.println("1. Ver espectáculos");
             System.out.println("2. Iniciar sesión");
-            System.out.println("3. Crear fichero de ejemplo (prueba de creación)");
+            System.out.println("3. Crear fichero de ejemplo (prueba de creación de fichero)");
             System.out.println("4. Salir");
             System.out.print("> ");
             String opcion = sc.nextLine().trim();
@@ -69,7 +69,7 @@ public class App {
             System.out.println("Sesión iniciada como ADMIN.");
             menuAdmin(sc);
         } else {
-            System.out.println("Credenciales no válidas o usuario no implementado (por ahora solo admin).");
+            System.out.println("Credenciales no válidas o usuario no implementado (por ahora solo invitado).");
         }
     }
 
