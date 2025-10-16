@@ -2,12 +2,14 @@ package com.alvaro.circo;
 
 import java.io.Serializable;
 
+//Clase Credenciales
 public class Credenciales implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private String password;
 	private Perfil perfil;
 
+	//Constructor
 	public Credenciales(String nombre, String password, Perfil perfil) {
 		super();
 		this.nombre = nombre;
@@ -15,6 +17,7 @@ public class Credenciales implements Serializable {
 		this.perfil = perfil;
 	}
 
+	//Getters y Setters
 	public String getNombre() {
 		return nombre;
 	}

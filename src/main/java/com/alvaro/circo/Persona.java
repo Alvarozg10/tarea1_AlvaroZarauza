@@ -2,6 +2,7 @@ package com.alvaro.circo;
 
 import java.io.Serializable;
 
+//Clase abstracta Persona
 public abstract class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
@@ -10,6 +11,7 @@ public abstract class Persona implements Serializable {
 	private String nacionalidad;
 	private Credenciales credenciales;
 
+	//Constructor
 	public Persona(Long id, String nombre, String email, String nacionalidad, Credenciales credenciales) {
 		super();
 		this.id = id;
@@ -19,6 +21,7 @@ public abstract class Persona implements Serializable {
 		this.credenciales = credenciales;
 	}
 
+	//Getters y Setters
 	public Long getId() {
 		return id;
 	}

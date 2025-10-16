@@ -3,6 +3,7 @@ package com.alvaro.circo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+//Clase Espectaculo
 public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 	private static final long serialVersionUID = 1L;
 	private Long id;
@@ -10,6 +11,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 
+	//Constructor
 	public Espectaculo(Long id, String nombre, LocalDate fechaInicio, LocalDate fechaFin) {
 		this.id = id;
 		this.nombre = nombre;
@@ -17,6 +19,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 		this.fechaFin = fechaFin;
 	}
 
+	//Getters y Setters
 	public Long getId() {
 		return id;
 	}
@@ -49,11 +52,13 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 		this.fechaFin = fechaFin;
 	}
 
+	//Método CompareTo Espectaculos
 	@Override
 	public int compareTo(Espectaculo o) {
 		return this.id.compareTo(o.id);
 	}
 
+	//Método ToString Espectaculos
 	@Override
 	public String toString() {
 		return String.format("ID: %d | %s | %s - %s", id, nombre, fechaInicio, fechaFin);

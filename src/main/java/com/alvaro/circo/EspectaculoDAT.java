@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//Clase EspectaculoDAT para el manejo del fichero
 public class EspectaculoDAT {
 	private final File file;
 
@@ -12,6 +13,7 @@ public class EspectaculoDAT {
 		this.file = new File(path);
 	}
 	
+	//Método para leer el fichero
 	public List<Espectaculo> leerTodos() {
         if (!file.exists()) return new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
@@ -31,6 +33,7 @@ public class EspectaculoDAT {
         }
     }
 
+	//Método para escribir el fichero
     public boolean guardarTodos(List<Espectaculo> lista) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             oos.writeObject(lista);

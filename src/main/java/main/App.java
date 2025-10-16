@@ -18,10 +18,10 @@ public class App {
         boolean salir = false;
         while (!salir) {
             System.out.println("\nMenú principal:");
-            System.out.println("1) Ver espectáculos (Invitado)");
-            System.out.println("2) Iniciar sesión");
-            System.out.println("3) Crear fichero de ejemplo (solo para pruebas)");
-            System.out.println("0) Salir");
+            System.out.println("1. Ver espectáculos");
+            System.out.println("2. Iniciar sesión");
+            System.out.println("3. Crear fichero de ejemplo (prueba de creación)");
+            System.out.println("4. Salir");
             System.out.print("> ");
             String opcion = sc.nextLine().trim();
             switch (opcion) {
@@ -34,7 +34,7 @@ public class App {
                 case "3":
                     crearEjemplo();
                     break;
-                case "0":
+                case "4":
                     salir = true;
                     break;
                 default:
