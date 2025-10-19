@@ -1,6 +1,6 @@
 package com.alvaro.circo;
 
-//Enum Especialidad
+//Clase Enum Especialidad
 public enum Especialidad {
 	ACROBACIA, HUMOR, MAGIA, EQUILIBRISMO, MALABARISMO
 }
