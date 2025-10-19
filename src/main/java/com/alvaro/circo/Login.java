@@ -17,7 +17,7 @@ public class Login {
         // Comprobar que los campos no están vacíos
         if (nombreUsuario == null || nombreUsuario.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
-            System.out.println("⚠️ Usuario y contraseña no pueden estar vacíos.");
+            System.out.println("Usuario y contraseña no pueden estar vacíos.");
             return false;
         }
 
@@ -62,18 +62,18 @@ public class Login {
                     // Comprobar si las credenciales coinciden
                     if (usuario.equals(nombreUsuario) && pass.equals(password)) {
                         usuarioActual = new Credenciales(idPersona, usuario, pass, email, nombre, nacionalidad, perfil);
-                        System.out.println("✅ Sesión iniciada como " + perfil);
+                        System.out.println("Sesión iniciada como " + perfil);
                         return true;
                     }
                 }
             }
 
         } catch (IOException | NumberFormatException e) {
-            System.out.println("❌ Error al leer credenciales: " + e.getMessage());
+            System.out.println("Error al leer credenciales: " + e.getMessage());
             return false;
         }
 
-        System.out.println("❌ Usuario o contraseña incorrectos.");
+        System.out.println("Usuario o contraseña incorrectos.");
         return false;
     }
 
