@@ -17,7 +17,7 @@ public class Credenciales implements Serializable {
 		this.perfil = perfil;
 	}
 
-	//Getters y Setters
+	//Getters y Setterss
 	public String getNombre() {
 		return nombre;
 	}
