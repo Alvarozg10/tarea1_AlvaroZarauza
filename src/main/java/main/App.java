@@ -1,13 +1,12 @@
 package main;
 
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import com.alvaro.circo.Espectaculo;
 import com.alvaro.circo.EspectaculoDAT;
 import com.alvaro.circo.Login;
 import com.alvaro.circo.Credenciales;
+import com.alvaro.circo.Registro; 
 
 public class App {
     private static final String FICHERO = "espectaculos.dat";
@@ -91,7 +90,8 @@ public class App {
 
         if (Login.iniciarSesion(user, pass)) {
             System.out.println("Sesión iniciada correctamente.");
-            if ("admin".equalsIgnoreCase(user)) {
+            Credenciales usuario = Login.getUsuarioActual();
+            if ("admin".equalsIgnoreCase(user) || usuario.getPerfil().name().equalsIgnoreCase("ADMIN")) {
                 menuAdmin(sc);
             }
         } else {
@@ -104,7 +104,8 @@ public class App {
         while (!volver) {
             System.out.println("\n--- Menú ADMIN ---");
             System.out.println("1. Ver espectáculos (completo)");
-            System.out.println("2. Volver al menú principal");
+            System.out.println("2. Registrar nueva persona (CU3)"); // 👈 NUEVA OPCIÓN
+            System.out.println("3. Volver al menú principal");
             System.out.print("> ");
             String op = sc.nextLine().trim();
 
@@ -112,15 +113,19 @@ public class App {
                 case "1":
                     mostrarEspectaculos();
                     break;
-                case "2":
+
+                case "2": 
+                    System.out.println("\n--- REGISTRO DE NUEVA PERSONA ---");
+                    Registro.registrarUsuario();
+                    break;
+
+                case "3":
                     volver = true;
                     break;
+
                 default:
                     System.out.println("Opción no válida.");
             }
         }
     }
-
 }
-
-

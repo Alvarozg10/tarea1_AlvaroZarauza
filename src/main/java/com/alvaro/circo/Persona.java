@@ -1,6 +1,7 @@
 package com.alvaro.circo;
 
 import java.io.Serializable;
+import java.util.List;
 
 //Clase abstracta Persona
 public abstract class Persona implements Serializable {
