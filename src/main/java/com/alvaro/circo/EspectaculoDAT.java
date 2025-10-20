@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat
+//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat del CU1
 public class EspectaculoDAT {
 	private final File file;
 

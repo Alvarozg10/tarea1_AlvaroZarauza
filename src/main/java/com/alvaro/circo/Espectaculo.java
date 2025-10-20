@@ -11,7 +11,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 
-	//Constructor
+	// Constructor
 	public Espectaculo(Long id, String nombre, LocalDate fechaInicio, LocalDate fechaFin) {
 		this.id = id;
 		this.nombre = nombre;
@@ -19,7 +19,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 		this.fechaFin = fechaFin;
 	}
 
-	//Getters y Setters
+	// Getters y Setters
 	public Long getId() {
 		return id;
 	}
@@ -52,13 +52,13 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
 		this.fechaFin = fechaFin;
 	}
 
-	//Método CompareTo Espectaculos
+	// Método CompareTo Espectaculos
 	@Override
 	public int compareTo(Espectaculo o) {
 		return this.id.compareTo(o.id);
 	}
 
-	//Método ToString Espectaculos
+	// Método ToString Espectaculos
 	@Override
 	public String toString() {
 		return String.format("ID: %d | %s | %s - %s", id, nombre, fechaInicio, fechaFin);

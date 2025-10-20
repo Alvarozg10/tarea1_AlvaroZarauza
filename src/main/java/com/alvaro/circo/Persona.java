@@ -3,7 +3,7 @@ package com.alvaro.circo;
 import java.io.Serializable;
 import java.util.List;
 
-//Clase abstracta Persona
+//Clase Abstracta Persona
 public abstract class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
