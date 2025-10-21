@@ -21,7 +21,6 @@ public class Login {
 		if (nombreUsuario.equals("admin") && password.equals("admin")) {
 			usuarioActual = new Credenciales(0, "admin", "admin", "admin@circo.es", "Administrador", "N/A",
 					Perfil.ADMIN);
-			System.out.println("Sesión iniciada como ADMIN.");
 			return true;
 		}
 
@@ -81,7 +80,7 @@ public class Login {
 		}
 	}
 
-	// Devuelve el usuario actual (sesión)
+	// Devuelve el usuario actual 
 	public static Credenciales getUsuarioActual() {
 		return usuarioActual;
 	}

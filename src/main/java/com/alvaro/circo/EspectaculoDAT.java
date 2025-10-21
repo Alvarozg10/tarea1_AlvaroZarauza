@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat del CU1
+//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat del CU1 y CU5
 public class EspectaculoDAT {
 	private final File file;
 
@@ -33,7 +33,7 @@ public class EspectaculoDAT {
         }
     }
 
-	//Método para escribir el fichero
+	//Método para escribir el fichero 
     public boolean guardarTodos(List<Espectaculo> lista) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             oos.writeObject(lista);
@@ -43,5 +43,26 @@ public class EspectaculoDAT {
             return false;
         }
     }
+    
+    //MÉTODOS CU5A
+    //Obtiene el siguiente ID autoincremental 
+    public int obtenerSiguienteId() {
+        List<Espectaculo> lista = leerTodos();
+        return (int) (lista.isEmpty() ? 1 : lista.get(lista.size() - 1).getId() + 1);
+    }
+
+    //Verifica si ya existe un espectáculo con ese nombre 
+    public boolean existeNombre(String nombre) {
+        return leerTodos().stream()
+                .anyMatch(e -> e.getNombre().equalsIgnoreCase(nombre));
+    }
+
+    // Agrega un nuevo espectáculo sin borrar los anteriores 
+    public boolean guardarEspectaculo(Espectaculo nuevo) {
+        List<Espectaculo> lista = leerTodos();
+        lista.add(nuevo);
+        return guardarTodos(lista);
+    }
 }
+
 

@@ -1,11 +1,8 @@
 package com.alvaro.circo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FicheroPersonas {
 
@@ -18,8 +15,8 @@ public class FicheroPersonas {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(";");
-                if (partes.length > 1 && partes[1].equalsIgnoreCase(nombreUsuario)) {
+                String[] partes = linea.split("[;|]");
+                if (partes.length > 1 && partes[1].trim().equalsIgnoreCase(nombreUsuario)) {
                     return true;
                 }
             }
@@ -35,10 +32,14 @@ public class FicheroPersonas {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(";");
+                String[] partes = linea.split("[;|]");
                 if (partes.length > 0) {
-                    int id = Integer.parseInt(partes[0]);
-                    if (id > maxId) maxId = id;
+                    try {
+                        int id = Integer.parseInt(partes[0].trim());
+                        if (id > maxId) maxId = id;
+                    } catch (NumberFormatException e) {
+                        System.out.println("ID inválido en línea: " + linea);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -65,5 +66,40 @@ public class FicheroPersonas {
             bw.newLine();
         }
     }
+
+    public static List<Credenciales> obtenerCoordinadores() {
+        List<Credenciales> coordinadores = new ArrayList<>();
+        File file = new File(FILE_PATH);
+        if (!file.exists()) return coordinadores;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split("[;|]");
+                if (partes.length == 7 && partes[6].trim().equalsIgnoreCase("coordinacion")) {
+                    try {
+                        int id = Integer.parseInt(partes[0].trim());
+                        String usuario = partes[1].trim();
+                        String password = partes[2].trim();
+                        String email = partes[3].trim();
+                        String nombre = partes[4].trim();
+                        String nacionalidad = partes[5].trim();
+
+                        Credenciales c = new Credenciales(
+                            id, usuario, password, email, nombre, nacionalidad, Perfil.COORDINACION
+                        );
+                        coordinadores.add(c);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error leyendo ID de coordinador: " + e.getMessage());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer coordinadores: " + e.getMessage());
+        }
+
+        return coordinadores;
+    }
 }
+
 
