@@ -10,7 +10,7 @@ import implementaciones.Login;
 import implementaciones.Registro;
 
 public class App {
-    private static final String FICHERO = "espectaculos.dat";
+	private static final String FICHERO = "ficheros/espectaculos.dat";
     private static final EspectaculoDAT dao = new EspectaculoDAT(FICHERO);
 
     public static void main(String[] args) {
