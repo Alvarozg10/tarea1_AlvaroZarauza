@@ -1,93 +1,116 @@
 package implementaciones;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.alvaro.circo.Credenciales;
 import com.alvaro.circo.Perfil;
 
 public class Login {
 
-	private static Credenciales usuarioActual = null;
-	private static final String RUTA_CREDENCIALES = "/credenciales.txt";
+    private static final String FILE_PATH = "src/main/resources/credenciales.txt";
 
-	// Método para iniciar sesión
-	public static boolean iniciarSesion(String nombreUsuario, String password) {
-		if (nombreUsuario == null || nombreUsuario.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-			System.out.println("Usuario y contraseña no pueden estar vacíos.");
-			return false;
-		}
+    private static Credenciales usuarioActual = null;
+    private static List<Credenciales> credenciales = new ArrayList<>();
+    private static boolean loaded = false;
 
-		// Comprobar credenciales admin
-		if (nombreUsuario.equals("admin") && password.equals("admin")) {
-			usuarioActual = new Credenciales(0, "admin", "admin", "admin@circo.es", "Administrador", "N/A",
-					Perfil.ADMIN);
-			return true;
-		}
+    
+    public static boolean iniciarSesion(String nombreUsuario, String password) {
+        if (nombreUsuario == null || nombreUsuario.trim().isEmpty() ||
+            password == null || password.trim().isEmpty()) {
+            System.out.println("Usuario y contraseña no pueden estar vacíos.");
+            return false;
+        }
 
-		try (InputStream inputStream = Login.class.getResourceAsStream(RUTA_CREDENCIALES);
-				BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        // Menú Admin
+        if (nombreUsuario.equalsIgnoreCase("admin") && password.equals("admin")) {
+            usuarioActual = new Credenciales(
+                0, "admin", "admin", "admin@circo.es",
+                "Administrador General", "España", Perfil.ADMIN
+            );
+            return true;
+        }
 
-			String linea;
-			while ((linea = br.readLine()) != null) {
-				String[] partes = linea.split("\\|");
+        // Credenciales cargadas
+        ensureLoaded();
 
-				if (partes.length == 7) {
-					int idPersona = Integer.parseInt(partes[0]);
-					String usuario = partes[1];
-					String pass = partes[2];
-					String email = partes[3];
-					String nombre = partes[4];
-					String nacionalidad = partes[5];
-					String perfilStr = partes[6].toLowerCase();
+        for (Credenciales c : credenciales) {
+            if (c.getNombreUsuario().equalsIgnoreCase(nombreUsuario) &&
+                c.getPassword().equals(password)) {
+                usuarioActual = c;
+                return true;
+            }
+        }
 
-					Perfil perfil;
-					switch (perfilStr) {
-					case "coordinacion":
-						perfil = Perfil.COORDINACION;
-						break;
-					case "artista":
-						perfil = Perfil.ARTISTA;
-						break;
-					default:
-						perfil = Perfil.INVITADO;
-						break;
-					}
+        return false;
+    }
 
-					if (usuario.equals(nombreUsuario) && pass.equals(password)) {
-						usuarioActual = new Credenciales(idPersona, usuario, pass, email, nombre, nacionalidad, perfil);
-						return true;
-					}
-				}
-			}
+    public static void cerrarSesion() {
+        usuarioActual = null;
+    }
 
-		} catch (IOException | NumberFormatException e) {
-			System.out.println("Error al leer credenciales: " + e.getMessage());
-			return false;
-		}
+    public static Credenciales getUsuarioActual() {
+        return usuarioActual;
+    }
 
-		System.out.println("Usuario o contraseña incorrectos.");
-		return false;
-	}
+    public static boolean haySesionActiva() {
+        return usuarioActual != null;
+    }
 
-	// Método para cerrar sesión
-	public static void cerrarSesion() {
-		if (usuarioActual != null) {
-			usuarioActual = null;
-		} else {
-			System.out.println("No hay ninguna sesión iniciada.");
-		}
-	}
+    public static void recargarCredenciales() {
+        credenciales = cargarCredenciales();
+        loaded = true;
+        System.out.println("Lista de credenciales recargada desde fichero.");
+    }
 
-	// Devuelve el usuario actual 
-	public static Credenciales getUsuarioActual() {
-		return usuarioActual;
-	}
+    private static void ensureLoaded() {
+        if (!loaded) {
+            credenciales = cargarCredenciales();
+            loaded = true;
+        }
+    }
 
-	// Devuelve si hay sesión activa
-	public static boolean haySesionActiva() {
-		return usuarioActual != null;
-	}
+    private static List<Credenciales> cargarCredenciales() {
+        List<Credenciales> lista = new ArrayList<>();
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()) {
+            System.out.println("No se encontró el fichero de credenciales en " + FILE_PATH);
+            return lista;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+                String[] partes = linea.split("[;|]");
+                if (partes.length < 7) continue;
+
+                try {
+                    int idPersona = Integer.parseInt(partes[0].trim());
+                    String usuario = partes[1].trim();
+                    String pass = partes[2].trim();
+                    String email = partes[3].trim();
+                    String nombre = partes[4].trim();
+                    String nacionalidad = partes[5].trim();
+                    String perfilStr = partes[6].trim().toUpperCase();
+
+                    Perfil perfil;
+                    switch (perfilStr) {
+                        case "COORDINACION": perfil = Perfil.COORDINACION; break;
+                        case "ARTISTA": perfil = Perfil.ARTISTA; break;
+                        case "ADMIN": perfil = Perfil.ADMIN; break;
+                        default: perfil = Perfil.INVITADO; break;
+                    }
+
+                    lista.add(new Credenciales(idPersona, usuario, pass, email, nombre, nacionalidad, perfil));
+                } catch (NumberFormatException ignored) {}
+            }
+        } catch (IOException e) {
+            System.out.println("Error leyendo credenciales: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }

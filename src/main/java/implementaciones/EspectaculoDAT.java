@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.alvaro.circo.Espectaculo;
 
-//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat del CU1 y CU5
+//Clase EspectaculoDAT para el manejo del fichero espectaculos.dat 
 public class EspectaculoDAT {
 	private final File file;
 
@@ -46,7 +46,6 @@ public class EspectaculoDAT {
         }
     }
     
-    //MÉTODOS CU5A
     //Obtiene el siguiente ID autoincremental 
     public int obtenerSiguienteId() {
         List<Espectaculo> lista = leerTodos();

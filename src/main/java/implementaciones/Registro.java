@@ -100,10 +100,18 @@ public class Registro {
 			};
 
 			FicheroPersonas.guardarPersona(nuevaPersona);
-
-			System.out.println("\n Persona registrada exitosamente:");
-			System.out.println(nuevaPersona);
-
+			
+			Login.recargarCredenciales();
+			
+			System.out.println("\nPersona registrada exitosamente:");
+			System.out.println(
+			    "ID: " + nuevoId +
+			    " | Usuario: " + nombreUsuario +
+			    " | Nombre: " + nombreReal +
+			    " | Nacionalidad: " + nacionalidad +
+			    " | Perfil: " + perfil
+			);
+			
 		} catch (IOException e) {
 			System.out.println("Error al leer o escribir ficheros: " + e.getMessage());
 		} catch (Exception e) {

@@ -18,8 +18,8 @@ public class App {
         boolean salir = false;
 
         while (!salir) {
-        	System.out.println("=== Gestión Circo ===");
-            System.out.println("\n=== Menú principal ===");
+        	System.out.println("\n=== Gestión Circo ===");
+            System.out.println("--- Menú principal ---");
 
             if (!Login.haySesionActiva()) {
                 System.out.println("1. Iniciar sesión");
@@ -121,8 +121,8 @@ public class App {
         while (!volver) {
             System.out.println("\n=== MENÚ ADMIN ===");
             System.out.println("1. Ver espectáculos");
-            System.out.println("2. Crear nuevo espectáculo (CU5A)");
-            System.out.println("3. Registrar nueva persona (CU3)");
+            System.out.println("2. Crear nuevo espectáculo");
+            System.out.println("3. Registrar nueva persona");
             System.out.println("4. Cerrar sesión y volver");
             System.out.print("> ");
 
@@ -138,7 +138,7 @@ public class App {
                     break;
 
                 case "3":
-                    System.out.println("\n--- Registrar nueva persona (CU3) ---");
+                    System.out.println("\n--- Registrar nueva persona  ---");
                     Registro.registrarUsuario();
                     break;
 
@@ -162,7 +162,7 @@ public class App {
         while (!volver) {
             System.out.println("\n=== MENÚ COORDINACIÓN ===");
             System.out.println("1. Ver espectáculos");
-            System.out.println("2. Crear nuevo espectáculo (CU5A)");
+            System.out.println("2. Crear nuevo espectáculo");
             System.out.println("3. Cerrar sesión y volver");
             System.out.print("> ");
             String op = sc.nextLine().trim();

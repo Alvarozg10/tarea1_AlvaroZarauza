@@ -36,21 +36,24 @@ public class FicheroPersonas {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String linea;
             while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+
                 String[] partes = linea.split("[;|]");
                 if (partes.length > 0) {
                     try {
                         int id = Integer.parseInt(partes[0].trim());
                         if (id > maxId) maxId = id;
-                    } catch (NumberFormatException e) {
-                        System.out.println("ID inválido en línea: " + linea);
+                    } catch (NumberFormatException ignored) {
                     }
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error al obtener ID: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("❌ Error al obtener ID: " + e.getMessage());
         }
+
         return maxId + 1;
     }
+
 
     public static void guardarPersona(Persona persona) throws IOException {
         File file = new File(FILE_PATH);
