@@ -138,7 +138,6 @@ public class App {
                     break;
 
                 case "3":
-                    System.out.println("\n--- Registrar nueva persona  ---");
                     Registro.registrarUsuario();
                     break;
 

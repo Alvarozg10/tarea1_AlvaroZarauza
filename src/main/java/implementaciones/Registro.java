@@ -14,7 +14,7 @@ public class Registro {
 		Scanner sc = new Scanner(System.in);
 
 		try {
-			System.out.println("=== REGISTRO DE NUEVA PERSONA ===");
+			System.out.println("--- Registro nueva persona ---");
 
 			System.out.print("Nombre real: ");
 			String nombreReal = sc.nextLine().trim();
