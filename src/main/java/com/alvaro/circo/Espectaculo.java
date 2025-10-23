@@ -19,7 +19,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
         this.fechaFin = fechaFin;
     }
 
-    // Nuevo constructor CU5A (con coordinador)
+    // Nuevo constructor 
     public Espectaculo(int id, String nombre, LocalDate fechaInicio, LocalDate fechaFin, Credenciales coordinador) {
         this.id = Long.valueOf(id);
         this.nombre = nombre;
@@ -77,10 +77,7 @@ public class Espectaculo implements Serializable, Comparable<Espectaculo> {
     @Override
     public String toString() {
         String infoCoordinador = (coordinador != null)
-                ? " | Coordinador: " + coordinador.getNombrePersona()
-                : "";
-        return "ID: " + id + " | " + nombre +
-               " (" + fechaInicio + " - " + fechaFin + ")" +
-               infoCoordinador;
+                ? " | Coordinador: " + coordinador.getNombrePersona(): "";
+        return "ID: " + id + " | " + nombre + " (" + fechaInicio + " - " + fechaFin + ")" + infoCoordinador;
     }
 }

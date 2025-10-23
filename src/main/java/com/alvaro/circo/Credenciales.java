@@ -84,7 +84,6 @@ public class Credenciales implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ID: " + idPersona + " | Usuario: " + nombreUsuario + " | Nombre: " + nombrePersona + " | Nacionalidad: "
-				+ nacionalidad + " | Perfil: " + perfil;
+		return "ID: " + idPersona + " | Usuario: " + nombreUsuario + " | Nombre: " + nombrePersona + " | Nacionalidad: " + nacionalidad + " | Perfil: " + perfil;
 	}
 }

@@ -70,7 +70,7 @@ public class EspectaculoDAT {
         return (int) (lista.get(lista.size() - 1).getId() + 1);
     }
 
-    // Método auxiliar para limpiar el fichero (opcional)
+    // Método auxiliar para limpiar el fichero 
     public void limpiar() {
         try {
             guardarTodos(new ArrayList<>());

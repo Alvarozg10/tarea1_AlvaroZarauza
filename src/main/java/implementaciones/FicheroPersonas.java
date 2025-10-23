@@ -48,7 +48,7 @@ public class FicheroPersonas {
                 }
             }
         } catch (IOException e) {
-            System.out.println("❌ Error al obtener ID: " + e.getMessage());
+            System.out.println("Error al obtener ID: " + e.getMessage());
         }
 
         return maxId + 1;
