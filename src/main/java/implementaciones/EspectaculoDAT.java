@@ -1,9 +1,11 @@
-package com.alvaro.circo;
+package implementaciones;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.alvaro.circo.Espectaculo;
 
 //Clase EspectaculoDAT para el manejo del fichero espectaculos.dat del CU1 y CU5
 public class EspectaculoDAT {

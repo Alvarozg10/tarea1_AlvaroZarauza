@@ -1,8 +1,12 @@
-package com.alvaro.circo;
+package implementaciones;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import com.alvaro.circo.Credenciales;
+import com.alvaro.circo.Perfil;
+import com.alvaro.circo.Persona;
 
 public class Registro {
 

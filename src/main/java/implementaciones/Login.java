@@ -1,9 +1,12 @@
-package com.alvaro.circo;
+package implementaciones;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import com.alvaro.circo.Credenciales;
+import com.alvaro.circo.Perfil;
 
 public class Login {
 
@@ -55,7 +58,6 @@ public class Login {
 
 					if (usuario.equals(nombreUsuario) && pass.equals(password)) {
 						usuarioActual = new Credenciales(idPersona, usuario, pass, email, nombre, nacionalidad, perfil);
-						System.out.println("Sesión iniciada como " + perfil);
 						return true;
 					}
 				}
@@ -73,7 +75,6 @@ public class Login {
 	// Método para cerrar sesión
 	public static void cerrarSesion() {
 		if (usuarioActual != null) {
-			System.out.println("Sesión cerrada de " + usuarioActual.getNombreUsuario());
 			usuarioActual = null;
 		} else {
 			System.out.println("No hay ninguna sesión iniciada.");

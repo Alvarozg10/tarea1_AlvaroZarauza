@@ -1,8 +1,11 @@
-package com.alvaro.circo;
+package implementaciones;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
+import com.alvaro.circo.Credenciales;
+import com.alvaro.circo.Espectaculo;
 
 public class GestionEspectaculos {
 

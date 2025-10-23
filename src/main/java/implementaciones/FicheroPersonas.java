@@ -1,8 +1,12 @@
-package com.alvaro.circo;
+package implementaciones;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.alvaro.circo.Credenciales;
+import com.alvaro.circo.Perfil;
+import com.alvaro.circo.Persona;
 
 public class FicheroPersonas {
 
@@ -52,20 +56,29 @@ public class FicheroPersonas {
         File file = new File(FILE_PATH);
         if (!file.exists()) file.createNewFile();
 
+        boolean necesitaSalto = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String ultima = null, linea;
+            while ((linea = br.readLine()) != null) ultima = linea;
+            if (ultima != null && !ultima.isEmpty()) necesitaSalto = true;
+        }
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+            if (necesitaSalto) bw.newLine(); 
             Credenciales c = persona.getCredenciales();
-            // formato: id;usuario;password;email;nombre;nacionalidad;perfil
-            String linea = c.getIdPersona() + ";" +
-                           c.getNombreUsuario() + ";" +
-                           c.getPassword() + ";" +
-                           c.getEmail() + ";" +
-                           c.getNombrePersona() + ";" +
-                           c.getNacionalidad() + ";" +
+
+            String linea = c.getIdPersona() + "|" +
+                           c.getNombreUsuario() + "|" +
+                           c.getPassword() + "|" +
+                           c.getEmail() + "|" +
+                           c.getNombrePersona() + "|" +
+                           c.getNacionalidad() + "|" +
                            c.getPerfil().name();
+
             bw.write(linea);
-            bw.newLine();
         }
     }
+
 
     public static List<Credenciales> obtenerCoordinadores() {
         List<Credenciales> coordinadores = new ArrayList<>();

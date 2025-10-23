@@ -4,6 +4,11 @@ import java.util.Scanner;
 import java.util.List;
 import com.alvaro.circo.*;
 
+import implementaciones.EspectaculoDAT;
+import implementaciones.GestionEspectaculos;
+import implementaciones.Login;
+import implementaciones.Registro;
+
 public class App {
     private static final String FICHERO = "espectaculos.dat";
     private static final EspectaculoDAT dao = new EspectaculoDAT(FICHERO);
@@ -13,6 +18,7 @@ public class App {
         boolean salir = false;
 
         while (!salir) {
+        	System.out.println("=== Gestión Circo ===");
             System.out.println("\n=== Menú principal ===");
 
             if (!Login.haySesionActiva()) {
@@ -94,11 +100,11 @@ public class App {
                     menuAdmin(sc);
                     break;
                 case COORDINACION:
+                	System.out.println("Bienvenido/a, " + actual.getNombrePersona()+".");
                     menuCoordinacion(sc);
                     break;
                 case ARTISTA:
-                    System.out.println("\n Bienvenido, " + actual.getNombrePersona() + 
-                                       ". (Por ahora solo puede ver su ficha).");
+                    System.out.println("Bienvenido/a, " + actual.getNombrePersona()+".");
                     break;
                 default:
                     System.out.println("Sesión iniciada, pero sin menú específico.");
@@ -111,31 +117,44 @@ public class App {
     //Menú Admin
     private static void menuAdmin(Scanner sc) {
         boolean volver = false;
+
         while (!volver) {
             System.out.println("\n=== MENÚ ADMIN ===");
             System.out.println("1. Ver espectáculos");
             System.out.println("2. Crear nuevo espectáculo (CU5A)");
-            System.out.println("3. Cerrar sesión y volver");
+            System.out.println("3. Registrar nueva persona (CU3)");
+            System.out.println("4. Cerrar sesión y volver");
             System.out.print("> ");
-            String op = sc.nextLine().trim();
 
-            switch (op) {
+            String opcion = sc.nextLine().trim();
+
+            switch (opcion) {
                 case "1":
                     mostrarEspectaculos();
                     break;
+
                 case "2":
                     GestionEspectaculos.crearEspectaculo(sc);
                     break;
+
                 case "3":
-                    Login.cerrarSesion();
-                    System.out.println("Sesión cerrada. Volviendo al menú principal...");
-                    volver = true;
+                    System.out.println("\n--- Registrar nueva persona (CU3) ---");
+                    Registro.registrarUsuario();
                     break;
+
+                case "4":
+                    Login.cerrarSesion();
+                    volver = true;
+                    System.out.println("Sesión cerrada. Volviendo al menú principal...");
+                    break;
+
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opción no válida. Intente de nuevo.");
             }
         }
     }
+
+
 
     //Menú Coordinación
     private static void menuCoordinacion(Scanner sc) {
